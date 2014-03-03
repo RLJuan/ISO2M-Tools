@@ -44,7 +44,12 @@ if exist %configFile% (
 ) else (goto:ERROR_NOCONFIG)
 
 if "%isoName%"=="" (goto:ERROR_NOISONAME)
-if not defined sevenZipPath (goto:ERROR_NO7ZIP)
+if defined sevenZipPath ( 
+	if not exist "%sevenZipPath%\7z.exe" (goto:ERROR_NO7ZIP)
+) else (goto:ERROR_NO7ZIP)
+if not exist "tools\xorriso.exe" (goto:ERROR_NOXORRISO)
+if not exist "tools\cygiconv-2.dll" (goto:ERROR_NOXORRISO)
+if not exist "tools\cygwin1.dll" (goto:ERROR_NOXORRISO)
 
 call:PrintL "# ISO name configured: %isoName%"
 call:PrintL "Detecting boot files..."
@@ -106,7 +111,7 @@ echo.) >>%logFileName%
 
 :: ISO creation
 echo Creating ISO file...
-(tools\xorriso -as mkisofs -R -r -J -joliet-long -l -iso-level 3 -V "ISO2VM" %isohybridArgs%%legacyArgs%%altBoot%%efiArgs%%extraArgs% -o ./%outFolder%/%isoName%.iso %rootFolder%) >>%logFileName% 2>&1
+(tools\xorriso -as mkisofs -R -r -J -joliet-long -l -cache-inodes -iso-level 3 -V "ISO2M" %isohybridArgs%%legacyArgs%%altBoot%%efiArgs%%extraArgs% -o ./%outFolder%/%isoName%.iso %rootFolder%) >>%logFileName% 2>&1
 echo. >>%logFileName%
 if %ERRORLEVEL%==0 if exist .\%outFolder%\%isoName%.iso (goto:SUCCESS) else (goto:ERROR_NOISO)
 
@@ -123,6 +128,10 @@ goto:ERROR_END
 
 :ERROR_NO7ZIP
 call:PrintL "# 7-Zip NOT found."
+goto:ERROR_END
+
+:ERROR_NOXORRISO
+call:PrintL "# XORrISO or related DLLs NOT found."
 goto:ERROR_END
 
 :ERROR_NOCONFIG

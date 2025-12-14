@@ -49,9 +49,9 @@ Both scripts share a similar workflow, but they rely on different underlying eng
   - ✅ BIOS (El Torito)
   - ✅ Real UEFI boot (PlatformID = 0xEF)
 - Key features:
-  - Standard hybrid BIOS + UEFI ISO
-  - Embedded FAT EFI System Partition (ESP)
-  - Full compatibility (real hardware and VMs)
+  - ✅ Standard hybrid BIOS + UEFI ISO
+  - ✅ Embedded FAT EFI System Partition (ESP)
+  - ✅ Full compatibility (real hardware and VMs)
 - Suitable for:
   - ISO distribution
   - Professional environments
@@ -79,10 +79,10 @@ Both scripts share a similar workflow, but they rely on different underlying eng
 
 ## Final notes
 
-- **ISObuilderMK** is suitable for testing and laboratory environments, especially when used with virtual machines such as VMware.
-- **ISObuilderXOR** is the recommended tool for creating **real hybrid BIOS + UEFI ISOs**, fully compatible with physical hardware and production environments.
+- **ISObuilderMK** is suitable for testing and laboratory environments, specially when used with virtual machines such as VMware.
+- **ISObuilderXOR** is the recommended tool for creating **real hybrid BIOS + UEFI ISOs**, fully compatible with physical hardware, VMs, and production environments.
 
-For any professional project that requires UEFI-compliant booting or public ISO distribution. **ISObuilderXOR should be used**.
+For any professional project that requires UEFI-compliant booting or public ISO distribution, **ISObuilderXOR should be used**.
 
 ## Autor
 [@RLJuan](https://github.com/RLJuan)
